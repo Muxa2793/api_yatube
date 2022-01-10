@@ -1,0 +1,49 @@
+POST http://127.0.0.1:8000/api/v1/api-token-auth/
+Content-Type: application/json
+
+{
+    "username": "admin2",
+    "password": "123"
+}
+###
+# admin 5cf5428f1ef8546767ec97148111707ddee245aa
+# admin2 64f8e86229e6f8fc3516a24cd0c22e89921701ad
+GET http://127.0.0.1:8000/api/v1/
+Authorization: Token 5cf5428f1ef8546767ec97148111707ddee245aa
+###
+GET http://127.0.0.1:8000/api/v1/posts/
+Authorization: Token 64f8e86229e6f8fc3516a24cd0c22e89921701ad
+###
+GET http://127.0.0.1:8000/api/v1/groups/
+Authorization: Token 5cf5428f1ef8546767ec97148111707ddee245aa
+###
+PATCH http://127.0.0.1:8000/api/v1/posts/6/
+Content-Type: application/json
+Authorization: Token 64f8e86229e6f8fc3516a24cd0c22e89921701ad
+
+{
+    "text": "test text 2",
+    "group": "1"
+}
+###
+POST http://127.0.0.1:8000/api/v1/groups/
+Content-Type: application/json
+Authorization: Token 5cf5428f1ef8546767ec97148111707ddee245aa
+
+{
+    "title": "тестовая группа 2",
+    "slug": "test-group-2",
+    "description": "тестовая группа 2"
+}
+###
+POST http://127.0.0.1:8000/api/v1/posts/6/comments/
+Content-Type: application/json
+Authorization: Token 5cf5428f1ef8546767ec97148111707ddee245aa
+
+{
+    "text": "тест тест5"
+}
+###
+DELETE http://127.0.0.1:8000/api/v1/posts/6/comments/11/
+Content-Type: application/json
+Authorization: Token 5cf5428f1ef8546767ec97148111707ddee245aa
