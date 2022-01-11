@@ -17,7 +17,7 @@ Authorization: Token 64f8e86229e6f8fc3516a24cd0c22e89921701ad
 GET http://127.0.0.1:8000/api/v1/groups/
 Authorization: Token 5cf5428f1ef8546767ec97148111707ddee245aa
 ###
-PATCH http://127.0.0.1:8000/api/v1/posts/6/
+POST http://127.0.0.1:8000/api/v1/posts/
 Content-Type: application/json
 Authorization: Token 64f8e86229e6f8fc3516a24cd0c22e89921701ad
 
@@ -44,6 +44,6 @@ Authorization: Token 5cf5428f1ef8546767ec97148111707ddee245aa
     "text": "тест тест5"
 }
 ###
-DELETE http://127.0.0.1:8000/api/v1/posts/6/comments/11/
+GET http://127.0.0.1:8000/api/v1/posts/6/comments/
 Content-Type: application/json
 Authorization: Token 5cf5428f1ef8546767ec97148111707ddee245aa
