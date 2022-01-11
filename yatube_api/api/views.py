@@ -3,21 +3,16 @@ from rest_framework import permissions, viewsets
 
 from posts.models import Comment, Group, Post
 from .serializers import CommentSerializer, GroupSerializer, PostSerializer
-
-
-class IsOwnerOrReadOnly(permissions.BasePermission):
-    message = 'Изменение чужого контента запрещено!'
-
-    def has_object_permission(self, request, view, obj):
-        if request.method in permissions.SAFE_METHODS:
-            return True
-        return obj.author == request.user
+from .permissions import IsOwnerOrReadOnly
 
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [IsOwnerOrReadOnly & permissions.IsAuthenticated]
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsOwnerOrReadOnly,
+    ]
 
     def perform_create(self, serializer):
         author = self.request.user
@@ -32,7 +27,10 @@ class GroupViewSet(viewsets.ReadOnlyModelViewSet):
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
-    permission_classes = [IsOwnerOrReadOnly & permissions.IsAuthenticated]
+    permission_classes = [
+        permissions.IsAuthenticated,
+        IsOwnerOrReadOnly,
+    ]
 
     def get_queryset(self):
         post_id = self.kwargs['post_id']
